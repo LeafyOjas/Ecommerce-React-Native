@@ -2,12 +2,19 @@ import Loader from "@/components/Loader";
 import PriceTag from "@/components/PriceTag";
 import { baseApi, windowWidth } from "@/constants";
 import useFetch from "@/hooks/useFetch";
+import { useProductStore } from "@/hooks/useProductStore";
 import { Image } from "expo-image";
+import { useRouter } from "expo-router";
 import { FlatList, StyleSheet, Text, View } from "react-native";
 import { Rating } from "react-native-ratings";
 
+const router = useRouter();
+
 export default function Index() {
-  const { loading, data } = useFetch(`${baseApi}products`);
+  const { setAllProducts } = useProductStore();
+  const { loading, data } = useFetch(`${baseApi}products`, (data) =>
+    setAllProducts(data)
+  );
   return (
     <FlatList
       data={data}
@@ -18,7 +25,15 @@ export default function Index() {
       showsVerticalScrollIndicator={false}
       ListEmptyComponent={loading ? <Loader /> : <Text>No data found</Text>}
       renderItem={({ item }) => (
-        <View style={styles.item}>
+        <View
+          style={styles.item}
+          onTouchEnd={() => {
+            router.push({
+              pathname: "/products/[id]" as any,
+              params: { id: item.id.toString() },
+            });
+          }}
+        >
           <Image
             source={item?.image}
             contentFit="contain"
@@ -70,7 +85,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     shadowColor: "#000",
     position: "relative",
-    // paddingBottom: 36,
     shadowOffset: {
       width: 0,
       height: 10,
