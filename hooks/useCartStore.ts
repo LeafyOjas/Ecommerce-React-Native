@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 
 type Product = {
-    id: string;
+    id: number;
     title: string;
     price: number;
     image: string;
@@ -12,9 +12,10 @@ type CartItem = Product & {
 };
 
 type CartStore = {
-    cart: Map<string, CartItem>;
+    cart: Map<number, CartItem>;
     addToCart: (product: Product) => void;
-    removeFromCart: (id: string) => void;
+    decrementToCart: (id: number) => void;
+    removeFromCart: (id: number) => void;
     clearCart: () => void;
     getCartItems: () => CartItem[];
     getTotalPrice: () => number;
@@ -42,6 +43,21 @@ export const useCartStore = create<CartStore>((set, get) => ({
         set({ cart });
     },
 
+    decrementToCart: (id) => {
+        const cart = new Map(get().cart);
+        const existing = cart.get(id);
+        if (existing) {
+            if (existing.quantity == 1) {
+                get().removeFromCart(id);
+            }
+            else {
+                cart.set(id, {
+                    ...existing, quantity: existing.quantity - 1
+                });
+                set({ cart })
+            }
+        }
+    },
     removeFromCart: (id) => {
         const cart = new Map(get().cart);
         cart.delete(id);

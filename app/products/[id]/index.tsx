@@ -43,7 +43,7 @@ const ProductView = () => {
         <Text style={{ fontSize: 15 }}>{description}</Text>
       </View>
 
-      <AddToCartButton />
+      <AddToCartButton productId={Number(id)} />
       <PriceTag price={price} />
     </ScrollView>
   );
