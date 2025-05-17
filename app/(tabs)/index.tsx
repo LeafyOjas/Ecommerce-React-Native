@@ -21,6 +21,18 @@ export default function Index() {
       keyExtractor={(_, index) => index.toString()}
       numColumns={2}
       style={{ flex: 1 }}
+      ListHeaderComponent={() => (
+        <Text
+          style={{
+            fontSize: 24,
+            fontWeight: "bold",
+            padding: 16,
+            color: "#000",
+          }}
+        >
+          Products
+        </Text>
+      )}
       contentContainerStyle={styles.container}
       showsVerticalScrollIndicator={false}
       ListEmptyComponent={loading ? <Loader /> : <Text>No data found</Text>}
@@ -77,7 +89,8 @@ const styles = StyleSheet.create({
   },
   item: {
     flex: 1,
-    margin: 10,
+    paddingTop: 10,
+    margin: 5,
     borderWidth: 1,
     borderColor: "#ccccb3",
     overflow: "hidden",
@@ -96,8 +109,9 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   image: {
-    width: windowWidth / 2 - 20,
-    height: 150,
+    width: windowWidth / 2 - 40,
+    height: 120,
     backgroundColor: "white",
+    alignSelf: "center",
   },
 });

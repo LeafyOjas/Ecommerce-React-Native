@@ -55,7 +55,7 @@ const ProductView = () => {
       <Image
         source={image}
         style={{ width: windowWidth - 32, height: 500, alignSelf: "center" }}
-        contentFit="cover"
+        contentFit="contain"
       />
       <View style={{ padding: 16, flex: 1 }}>
         <Text style={{ fontSize: 15 }}>{description}</Text>

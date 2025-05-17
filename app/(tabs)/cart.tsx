@@ -21,8 +21,9 @@ const Cart = () => {
         numColumns={1}
         contentContainerStyle={{
           backgroundColor: "#fff",
-          flex: 1,
+          flexGrow: 1,
           padding: 16,
+          paddingBottom: 80,
         }}
         keyExtractor={(item) => item.id.toString()}
         ListHeaderComponent={() => (
@@ -43,10 +44,15 @@ const Cart = () => {
             </Pressable>
           </View>
         )}
+        showsVerticalScrollIndicator={false}
         ListEmptyComponent={() => <Text>No Items added in the cart yet</Text>}
         renderItem={({ item }) => (
           <View style={styles.cartItem}>
-            <Image source={item.image} style={styles.image} />
+            <Image
+              source={item.image}
+              style={styles.image}
+              contentFit="contain"
+            />
             <View style={styles.sbContainer}>
               <Text style={styles.title} numberOfLines={2} ellipsizeMode="tail">
                 {item.title}
@@ -138,6 +144,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 14,
+    width: 200,
   },
   footerText: {
     fontSize: 16,
