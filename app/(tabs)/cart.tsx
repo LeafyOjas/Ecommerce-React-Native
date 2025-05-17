@@ -40,18 +40,39 @@ const Cart = () => {
                 readonly
                 style={{ alignSelf: "flex-start", marginTop: 4 }}
               />
-              <View style={[styles.row, styles.iconContainer]}>
-                <Pressable onPress={() => addToCart(products.get(item.id))}>
-                  <Text style={styles.iconText}>+</Text>
-                </Pressable>
+              <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  width: 200,
+                }}
+              >
+                <View style={[styles.row, styles.iconContainer]}>
+                  <Pressable onPress={() => addToCart(products.get(item.id))}>
+                    <Text style={styles.iconText}>+</Text>
+                  </Pressable>
+                  <Text
+                    style={[
+                      styles.iconText,
+                      { marginLeft: 10, marginRight: 10 },
+                    ]}
+                  >
+                    {cart.get(item.id)?.quantity ?? 0}
+                  </Text>
+                  <Pressable onPress={() => decrementToCart(item.id)}>
+                    <Text style={styles.iconText}>-</Text>
+                  </Pressable>
+                </View>
                 <Text
-                  style={[styles.iconText, { marginLeft: 10, marginRight: 10 }]}
+                  style={{
+                    fontSize: 14,
+                    fontWeight: "bold",
+                    color: "#000",
+                  }}
                 >
-                  {cart.get(item.id)?.quantity ?? 0}
+                  ₹&nbsp;{item.quantity * item.price}
                 </Text>
-                <Pressable onPress={() => decrementToCart(item.id)}>
-                  <Text style={styles.iconText}>-</Text>
-                </Pressable>
               </View>
             </View>
           </View>
