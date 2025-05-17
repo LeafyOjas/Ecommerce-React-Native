@@ -36,7 +36,7 @@ const ProductView = () => {
       </View>
       <Image
         source={image}
-        style={{ width: windowWidth, height: 500 }}
+        style={{ width: windowWidth - 32, height: 500, alignSelf: "center" }}
         contentFit="cover"
       />
       <View style={{ padding: 16, flex: 1 }}>
