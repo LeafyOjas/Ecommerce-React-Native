@@ -1,6 +1,7 @@
 import { useCartStore } from "@/hooks/useCartStore";
 import { useProductStore } from "@/hooks/useProductStore";
 import { Image } from "expo-image";
+import { useRouter } from "expo-router";
 import React from "react";
 import { FlatList, Pressable, StyleSheet, Text, View } from "react-native";
 import { Rating } from "react-native-ratings";
@@ -11,6 +12,7 @@ const Cart = () => {
   const { products } = useProductStore();
   const cartItems = getCartItems();
   const totalPrice = getTotalPrice();
+  const router = useRouter();
 
   return (
     <View style={{ flex: 1 }}>
@@ -23,7 +25,24 @@ const Cart = () => {
           padding: 16,
         }}
         keyExtractor={(item) => item.id.toString()}
-        ListHeaderComponent={() => <Text style={styles.header}>Your Cart</Text>}
+        ListHeaderComponent={() => (
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
+            <Text style={styles.header}>Your Cart</Text>
+            <Pressable onPress={() => router.back()}>
+              <Text
+                style={{ fontWeight: "bold", textDecorationLine: "underline" }}
+              >
+                Go back
+              </Text>
+            </Pressable>
+          </View>
+        )}
         ListEmptyComponent={() => <Text>No Items added in the cart yet</Text>}
         renderItem={({ item }) => (
           <View style={styles.cartItem}>

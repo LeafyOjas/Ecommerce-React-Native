@@ -9,7 +9,7 @@ export default PriceTag;
 
 const styles = StyleSheet.create({
   priceTag: {
-    backgroundColor: "#ff80b3",
+    backgroundColor: "#4d004d",
     paddingHorizontal: 10,
     paddingVertical: 6,
     borderRadius: 20,

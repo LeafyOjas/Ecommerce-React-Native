@@ -3,7 +3,7 @@ import PriceTag from "@/components/PriceTag";
 import { windowWidth } from "@/constants";
 import { useProductStore } from "@/hooks/useProductStore";
 import { Image } from "expo-image";
-import { useLocalSearchParams } from "expo-router";
+import { Link, useLocalSearchParams } from "expo-router";
 import React from "react";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 import { Rating } from "react-native-ratings";
@@ -22,16 +22,34 @@ const ProductView = () => {
         <Text style={styles.title} numberOfLines={2} ellipsizeMode="tail">
           {title}
         </Text>
-        <View style={{ flexDirection: "row", alignItems: "center" }}>
-          <Rating
-            type="star"
-            ratingCount={5}
-            imageSize={15}
-            startingValue={rating?.rate}
-            readonly
-            style={{ marginRight: 10 }}
-          />
-          <Text style={styles.rating}>{rating.count} Reviews</Text>
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "space-between",
+          }}
+        >
+          <View style={{ flexDirection: "row", alignItems: "center" }}>
+            <Rating
+              type="star"
+              ratingCount={5}
+              imageSize={15}
+              startingValue={rating?.rate}
+              readonly
+              style={{ marginRight: 10 }}
+            />
+            <Text style={styles.rating}>{rating.count} Reviews</Text>
+          </View>
+          <Link
+            href="/(tabs)/cart"
+            style={{
+              textDecorationLine: "underline",
+              color: "purple",
+              fontWeight: 600,
+            }}
+          >
+            Visit cart
+          </Link>
         </View>
       </View>
       <Image
