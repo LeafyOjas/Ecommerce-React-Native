@@ -11,7 +11,6 @@ const Cart = () => {
   const { products } = useProductStore();
   const cartItems = getCartItems();
   const totalPrice = getTotalPrice();
-  console.log(cartItems);
 
   return (
     <View style={{ flex: 1 }}>
