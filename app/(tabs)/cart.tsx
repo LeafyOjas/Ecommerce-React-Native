@@ -112,7 +112,7 @@ const Cart = () => {
         }}
       >
         <Text style={styles.footerText}>Order Total</Text>
-        <Text style={styles.footerText}>₹&nbsp;{totalPrice}</Text>
+        <Text style={styles.footerText}>₹&nbsp;{totalPrice.toFixed(2)}</Text>
       </View>
     </View>
   );
